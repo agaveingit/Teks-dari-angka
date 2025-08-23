@@ -2,8 +2,7 @@
 
 def angkajaditeks(angka):
     satuan: list = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
-    # se: list = ['', 'sepuluh', 'seratus', 'seribu', 'sejuta']
-
+    
     angka = int(angka)
     if angka == 0:
         return 0
