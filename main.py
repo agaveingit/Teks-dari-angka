@@ -1,5 +1,5 @@
-def num2word(angka):
-    satuan: list = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
+def teksdariangka(angka):
+    satuan: list[str] = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
 
     angka = int(angka)
     if angka == 0:
@@ -49,7 +49,7 @@ def num2word(angka):
 def main():
     try:
         nomer = input("Masukin angka: ")
-        num2word(nomer)
+        teksdariangka(nomer)
     except:
         ValueError
         print("Error! Harus masukan angka")
