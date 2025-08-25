@@ -1,4 +1,4 @@
-def teksdariangka(angka):
+def teks_dari_angka(angka):
     satuan: list[str] = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
 
     angka = int(angka)
@@ -49,7 +49,7 @@ def teksdariangka(angka):
 def main():
     try:
         nomer = input("Masukin angka: ")
-        teksdariangka(nomer)
+        teks_dari_angka(nomer)
     except:
         ValueError
         print("Error! Harus masukan angka")
