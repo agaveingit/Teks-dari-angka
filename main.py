@@ -38,6 +38,10 @@ def teks_dari_angka(angka):
             return 0
         else:
             print(f"{satuan[digit1]} ratus {satuan[digit2]} puluh {satuan[digit3]}")
+            return 0
+        
+    def ribu(i):
+        digit1 = int(i / 100)
 
     if angka < 100:
         belas_puluh(angka)
