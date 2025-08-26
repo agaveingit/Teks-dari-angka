@@ -1,54 +1,41 @@
 def teks_dari_angka(angka):
     satuan: list[str] = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
+    belasan: list[str] = ["sepuluh", "sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", "enam belas", "tujuh belas", "delapan belas", "sembilan belas"]
 
-    angka = int(angka)
-    if angka == 0:
-        return 0
-    
-    def belas_puluh(i):
-        digit1 = int(i / 10)
-        digit2 = int(i % 10)
-        if digit1 == 1 and digit2 == 1:
-            print("sebelas")
-            return 0
-        elif digit1 == 1:
-            print(f"{satuan[digit2]} belas")
-            return 0
-        elif digit1 == 0:
-            print(f"{satuan[digit2]}")
-        else:
-            print(f"{satuan[digit1]} puluh {satuan[digit2]}")
-            return 0
-
-    def ratus(i):
-        digit1 = int(i / 100)
-        digit2 = int((i - (digit1 * 100)) / 10)
-        digit3 = int(i - (digit1 * 100) - (digit2 * 10))
-        if digit1 == 1:
-            if digit2 == 1 and digit3 == 1:
-                print("seratus sebelas")
-            else:
-                print("seratus")
-            return 0
-        elif digit2 == 1:
-            print(f"{satuan[digit1]} ratus {satuan[digit3]} belas")
-            return 0
-        elif digit2 == 0:
-            print(f"{satuan[digit1]} ratus {satuan[digit3]}")
-            return 0
-        else:
-            print(f"{satuan[digit1]} ratus {satuan[digit2]} puluh {satuan[digit3]}")
-            return 0
-        
-    def ribu(i):
-        digit1 = int(i / 100)
+    def puluhan(i):
+        puluh: int = int(i / 10)
+        sisa: int = i % 10
+        match i:
+            case _ if i < 10:
+                return satuan[i]
+            case _ if i < 20:
+                return belasan[i - 10]
+            case _ if i < 100:
+                if (sisa) == 0:
+                    return f"{satuan[puluh]} puluh" 
+                else:
+                    return f"{satuan[puluh]} puluh {satuan[sisa]}"
+    def ratusan(i):
+        ratus: int = int(i / 100)
+        sisa: int = i % 100
+        match i:
+            case _ if i < 200:
+                if (sisa) == 0:
+                    return "seratus"
+                else:
+                    return f"seratus {puluhan(sisa)}"
+            case _ if i < 1000:
+                if (sisa) == 0:
+                    return f"{satuan[ratus]} ratus"  
+                else:
+                    return f"{satuan[ratus]} ratus {puluhan(sisa)}"
 
     if angka < 100:
-        belas_puluh(angka)
+        return puluhan(angka)
     elif angka < 1000:
-        ratus(angka)
+        return ratusan(angka)
     else:
-        print("Error!: Maksimal input adalah 999")
+        return "Error!: Maksimal input adalah 999"
 
 def main():
     try:
