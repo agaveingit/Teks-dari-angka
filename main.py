@@ -6,11 +6,11 @@ def teks_dari_angka(angka):
         puluh: int = int(i / 10)
         sisa: int = i % 10
         match i:
-            case _ if i < 10:
-                return satuan[i]
-            case _ if i < 20:
-                return belasan[i - 10]
-            case _ if i < 100:
+            case i if i < 10:
+                return f"{satuan[i]}"
+            case i if i < 20:
+                return f"{belasan[i - 10]}"
+            case i if i < 100:
                 if (sisa) == 0:
                     return f"{satuan[puluh]} puluh" 
                 else:
@@ -19,18 +19,20 @@ def teks_dari_angka(angka):
         ratus: int = int(i / 100)
         sisa: int = i % 100
         match i:
-            case _ if i < 200:
+            case i if i < 200:
                 if (sisa) == 0:
                     return "seratus"
                 else:
                     return f"seratus {puluhan(sisa)}"
-            case _ if i < 1000:
+            case i if i < 1000:
                 if (sisa) == 0:
                     return f"{satuan[ratus]} ratus"  
                 else:
                     return f"{satuan[ratus]} ratus {puluhan(sisa)}"
 
-    if angka < 100:
+    if angka == 0:
+        return "Nol"
+    elif angka < 100:
         return puluhan(angka)
     elif angka < 1000:
         return ratusan(angka)
@@ -39,8 +41,9 @@ def teks_dari_angka(angka):
 
 def main():
     try:
-        nomer = input("Masukin angka: ")
-        teks_dari_angka(nomer)
+        nomer: int = int(input("Masukin angka: "))
+        hasil = teks_dari_angka(nomer)
+        print(hasil)
     except:
         ValueError
         print("Error! Harus masukan angka")
