@@ -4,8 +4,6 @@ class Konverter:
     sesuai dengan input yang diberikan.
 
     Kalkulasi dilakukan dengan cara mencari bilangan dan posisinya.
-    Batasan pada kode ini adalah limit angkanya sendiri yang hanya sampai 999.
-    Kode ini juga belum bisa melakukan konversi bilangan negatif.
     """
     def __init__(self):
         self.satuan: list[str] = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
@@ -44,12 +42,14 @@ class Konverter:
     def konversi(self, angka: int) -> str:
         if angka < 0:
             return f"minus {self.konversi(-angka)}"
-        elif angka == 0:
+        
+        if angka == 0:
             return "nol"
-        elif angka < 1000:
+        
+        if angka < 1000:
             return self.ratusan(angka)
-        else:
-            return "Error!: Maksimal input adalah 999"
+        # else:
+        #     return "Error!: Maksimal input adalah 999"
         for nilai, nama in self.angka_level_tinggi:
             if angka >= nilai:
                 depan = angka // nilai
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     """
     konversi_angka = Konverter()
     try:
-        contoh_angka: int = 1000
+        contoh_angka: int = 10000000
         hasil: str = konversi_angka.konversi(contoh_angka) # Ekspektasi output = sembilan ratus tujuh belas
         print(hasil)
     except (ValueError, TypeError):
