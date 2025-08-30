@@ -48,14 +48,12 @@ class Konverter:
         
         if angka < 1000:
             return self.ratusan(angka)
-        # else:
-        #     return "Error!: Maksimal input adalah 999"
+
         for nilai, nama in self.angka_level_tinggi:
             if angka >= nilai:
                 depan = angka // nilai
                 sisa = angka % nilai
 
-                # bentuk khusus "seribu"
                 if nilai == 1_000 and depan == 1:
                     head = "seribu"
                 else:
