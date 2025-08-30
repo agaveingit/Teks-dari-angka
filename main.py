@@ -73,8 +73,8 @@ if __name__ == "__main__":
     """
     konversi_angka = Konverter()
     try:
-        contoh_angka: int = 10000000
-        hasil: str = konversi_angka.konversi(contoh_angka) # Ekspektasi output = sembilan ratus tujuh belas
+        contoh_angka: int = 979
+        hasil: str = konversi_angka.konversi(contoh_angka) # Ekspektasi output = sembilan ratus tujuh puluh sembilan
         print(hasil)
     except (ValueError, TypeError):
         print("Error!: Harus masukan angka 0 - 999")
