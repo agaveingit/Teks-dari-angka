@@ -75,4 +75,4 @@ if __name__ == "__main__":
         hasil: str = konversi_angka.konversi(contoh_angka) # Ekspektasi output = sembilan ratus tujuh puluh sembilan
         print(hasil)
     except (ValueError, TypeError):
-        print("Error!: Harus masukan angka 0 - 999")
+        print("Error!: Harus masukan angka")
