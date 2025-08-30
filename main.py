@@ -63,7 +63,7 @@ class Konverter:
 
                 return head if sisa == 0 else f"{head} {self.konversi(sisa)}"
 
-        # fallback (harusnya nggak pernah ke sini)
+        # fallback 
         return ""
 
 if __name__ == "__main__":
