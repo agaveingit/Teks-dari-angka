@@ -43,14 +43,28 @@ class Konverter:
 
     def konversi(self, angka: int) -> str:
         if angka < 0:
-            return f"minus {self.konversi(angka)}"
+            return f"minus {self.konversi(-angka)}"
         elif angka == 0:
             return "nol"
         elif angka < 1000:
             return self.ratusan(angka)
         else:
             return "Error!: Maksimal input adalah 999"
-        
+        for nilai, nama in self.angka_level_tinggi:
+            if angka >= nilai:
+                depan = angka // nilai
+                sisa = angka % nilai
+
+                # bentuk khusus "seribu"
+                if nilai == 1_000 and depan == 1:
+                    head = "seribu"
+                else:
+                    head = f"{self.konversi(depan)} {nama}"
+
+                return head if sisa == 0 else f"{head} {self.konversi(sisa)}"
+
+        # fallback (harusnya nggak pernah ke sini)
+        return ""
 
 if __name__ == "__main__":
     """
@@ -59,7 +73,7 @@ if __name__ == "__main__":
     """
     konversi_angka = Konverter()
     try:
-        contoh_angka: int = 917
+        contoh_angka: int = 1000
         hasil: str = konversi_angka.konversi(contoh_angka) # Ekspektasi output = sembilan ratus tujuh belas
         print(hasil)
     except (ValueError, TypeError):
