@@ -49,6 +49,9 @@ class Konverter:
         if angka < 1000:
             return self.ratusan(angka)
 
+        # Kode dilakukan dengan mencari nilai yang setara dengan
+        # input yang diberikan. Dimulai dari level tertinggi
+        # menuju level yang lebih rendah.
         for nilai, nama in self.angka_level_tinggi:
             if angka >= nilai:
                 depan = angka // nilai
