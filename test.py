@@ -10,6 +10,4 @@ def time_function(func, n: int) -> None:
     print(f"Time result {end - start:.9f} s")
 
 k = Konverter()
-# h = k.konversi(1234567890)
-# print(h)
 time_function(k.konversi, 999999999999)
