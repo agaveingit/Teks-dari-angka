@@ -24,7 +24,11 @@ class Konverter:
         elif i < 20:
             return f"{self.belasan[i - 10]}"
         else:
-            return f"{self.satuan[puluh]} puluh {self.satuan[sisa]}"
+            hasil_satuan = self.satuan[sisa]
+            if hasil_satuan:
+                return f"{self.satuan[puluh]} puluh {hasil_satuan}"
+            else:
+                return f"{self.satuan[puluh]} puluh"
 
     def ratusan(self, i: int) -> str:
         ratus: int = i // 100
@@ -33,8 +37,12 @@ class Konverter:
             return self.puluhan(i)
         elif i < 200:
             return f"seratus {self.puluhan(sisa)}"
-        else:
-            return f"{self.satuan[ratus]} ratus {self.puluhan(sisa)}"
+        else: 
+            hasil_puluhan = self.puluhan(sisa)
+            if hasil_puluhan:
+                return f"{self.satuan[ratus]} ratus {hasil_puluhan}"
+            else:
+                return f"{self.satuan[ratus]} ratus"
 
     def konversi(self, angka: int) -> str:
         if angka < 0:
@@ -66,13 +74,17 @@ class Konverter:
 
 def main():
     k = Konverter()
-    try:
-        angka: int = 1234567890 
-        hasil: str = k.konversi(angka)
-        print(hasil)
-        # Expected: satu miliar dua ratus tiga puluh empat juta lima ratus enam puluh tujuh ribu delapan ratus sembilan puluh 
-    except (ValueError, TypeError):
-        print("Error!: Harus masukan angka")
+    print("Masukkan angka untuk dikonversi (atau 'keluar' untuk berhenti):")
+    while True:
+        try:
+            masukan = input("> ")
+            if masukan.lower() == 'keluar':
+                break
+            angka = int(masukan)
+            hasil = k.konversi(angka)
+            print(f"Hasil: {hasil}")
+        except ValueError:
+            print("Error: Input tidak valid. Harap masukkan angka bulat.")
 
 
 if __name__ == "__main__":
