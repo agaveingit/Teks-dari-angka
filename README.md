@@ -1,14 +1,63 @@
-# Project Pertama 🚀
+# Angka Jadi Teks 🔢
 
-- Projek ini cuma sekedar kode simpel yang bisa mengubah angka jadi teks 🔢
-- Sekaligus jadi uji coba commit GitHub
+Proyek ini menyediakan sebuah skrip Python sederhana untuk mengonversi angka (integer) menjadi ejaan yang sesuai dalam Bahasa Indonesia. Skrip ini mampu menangani angka dari nol hingga triliunan, termasuk bilangan negatif.
 
-# Fitur ✨
+## ✨ Fitur Utama
 
-Sesuai namanya,
+- **Konversi Angka ke Teks**: Mengubah angka bulat menjadi ejaan yang sesuai dalam Bahasa Indonesia.
+- **Dukungan Angka Besar**: Mampu menangani angka hingga 999,999,999,999,999 (di bawah kuadriliun).
+- **Penanganan Angka Negatif**: Mengawali hasil dengan "minus" untuk angka negatif.
+- **Kasus Khusus Bahasa Indonesia**: Menangani secara benar kasus seperti "seratus", "seribu", "sebelas", dan puluhan/ratusan.
+- **Antarmuka Interaktif**: Dilengkapi dengan _command-line interface_ (CLI) sederhana untuk penggunaan langsung.
+- **Efisien**: Menggunakan algoritma rekursif dengan kompleksitas waktu **O(log n)**, sehingga sangat cepat bahkan untuk angka yang sangat besar.
 
-- Program ini bisa ubah angka jadi teks meski terbatas banget (maks. 999)
+## ⚙️ Instalasi
 
-# Kontribusi ⬆️
+Tidak ada dependensi eksternal yang diperlukan. Anda hanya memerlukan **Python 3.6+** terinstal.
 
-Boleh banget, kontribusi untuk bikin kode ini jadi lebih simpel atau versatile lagi.
+Cukup kloning repositori ini atau unduh file `main.py`.
+
+## 🚀 Cara Penggunaan
+
+Ada dua cara untuk menggunakan kode ini:
+
+### 1. Melalui Command Line (Interaktif)
+
+Jalankan file `main.py` untuk memulai mode interaktif. Masukkan angka yang ingin Anda konversi, dan tekan Enter. Ketik `keluar` untuk menghentikan program.
+
+```bash
+python main.py
+```
+
+**Contoh Sesi:**
+
+```
+Masukkan angka untuk dikonversi (atau 'keluar' untuk berhenti):
+> 1247639
+Hasil: satu juta dua ratus empat puluh tujuh ribu enam ratus tiga puluh sembilan
+> -101
+Hasil: minus seratus satu
+> keluar
+```
+
+### 2. Sebagai Modul di Proyek Lain
+
+Anda juga bisa mengimpor kelas `Konverter` ke dalam skrip Python Anda yang lain.
+
+```python
+from main import Konverter
+
+# Buat instance dari Konverter
+k = Konverter()
+
+# Gunakan metode konversi()
+print(k.konversi(2024))
+# Output: dua ribu dua puluh empat
+
+print(k.konversi(150000))
+# Output: seratus lima puluh ribu
+```
+
+## 🤝 Kontribusi
+
+Kontribusi sangat diterima! Jika Anda memiliki ide untuk penyederhanaan, penambahan fitur (misalnya, angka desimal), atau perbaikan, silakan buat _pull request_ atau buka _issue_.
