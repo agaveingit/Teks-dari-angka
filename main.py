@@ -5,7 +5,7 @@ class Konverter:
 
     Kalkulasi dilakukan dengan cara mencari bilangan dan posisinya.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         self.satuan: list[str] = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
         self.belasan: list[str] = ["sepuluh", "sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", 
                                     "enam belas", "tujuh belas", "delapan belas", "sembilan belas"]
@@ -17,21 +17,18 @@ class Konverter:
         ]
 
     def puluhan(self, i: int) -> str:
-        puluh: int = int(i / 10)
-        sisa: int = i % 10
+        puluh: int = i // 10
+        sisa: int = i % 10 
         if i < 10:
             return f"{self.satuan[i]}"
         elif i < 20:
-                return f"{self.belasan[i - 10]}"
+            return f"{self.belasan[i - 10]}"
         else:
-            if (sisa) == 0:
-                return f"{self.satuan[puluh]} puluh" 
-            else:
-                return f"{self.satuan[puluh]} puluh {self.satuan[sisa]}"
+            return f"{self.satuan[puluh]} puluh {self.satuan[sisa]}"
 
     def ratusan(self, i: int) -> str:
-        ratus: int = int(i / 100)
-        sisa: int = i % 100
+        ratus: int = i // 100
+        sisa: int = i % 100 
         if i < 100:
             return self.puluhan(i)
         elif i < 200:
@@ -70,9 +67,10 @@ class Konverter:
 def main():
     k = Konverter()
     try:
-        angka: int = 1234567890
+        angka: int = 1234567890 
         hasil: str = k.konversi(angka)
         print(hasil)
+        # Expected: satu miliar dua ratus tiga puluh empat juta lima ratus enam puluh tujuh ribu delapan ratus sembilan puluh 
     except (ValueError, TypeError):
         print("Error!: Harus masukan angka")
 
