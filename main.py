@@ -1,50 +1,49 @@
 class Konverter:
     """
-    Kode ini berfungsi untuk mengubah angka menjadi teks 
-    sesuai dengan input yang diberikan.
-
-    Kalkulasi dilakukan dengan cara mencari bilangan dan posisinya.
+    Mengonversi angka menjadi teks ejaannya dalam Bahasa Indonesia.
     """
     def __init__(self) -> None:
-        self.satuan: list[str] = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
-        self.belasan: list[str] = ["sepuluh", "sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", 
+        self.SATUAN: list[str] = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
+        self.BELASAN: list[str] = ["sepuluh", "sebelas", "dua belas", "tiga belas", "empat belas", "lima belas", 
                                     "enam belas", "tujuh belas", "delapan belas", "sembilan belas"]
-        self.angka_level_tinggi: list[tuple[int, str]] = [
+        self.ANGKA_LEVEL_TINGGI: list[tuple[int, str]] = [
             (1_000_000_000_000, "triliun"),
             (1_000_000_000, "miliar"),
             (1_000_000, "juta"),
             (1_000, "ribu"),
         ]
 
-    def puluhan(self, i: int) -> str:
-        puluh: int = i // 10
-        sisa: int = i % 10 
-        if i < 10:
-            return f"{self.satuan[i]}"
-        elif i < 20:
-            return f"{self.belasan[i - 10]}"
-        else:
-            hasil_satuan = self.satuan[sisa]
-            if hasil_satuan:
-                return f"{self.satuan[puluh]} puluh {hasil_satuan}"
-            else:
-                return f"{self.satuan[puluh]} puluh"
+    def puluhan(self, angka: int) -> str:
+        # Mengubah angka di bawah 100 menjadi teks.
+        if 0 <= angka < 10:
+            return f"{self.SATUAN[angka]}"
+        if 10 <= angka < 20:
+            return f"{self.BELASAN[angka - 10]}"
+        puluh: int = angka // 10
+        sisa: int = angka % 10 
+        if sisa == 0:
+            return f"{self.SATUAN[puluh]} puluh"
+        return f"{self.SATUAN[puluh]} puluh {self.SATUAN[sisa]}"
 
-    def ratusan(self, i: int) -> str:
-        ratus: int = i // 100
-        sisa: int = i % 100 
-        if i < 100:
-            return self.puluhan(i)
-        elif i < 200:
-            return f"seratus {self.puluhan(sisa)}"
-        else: 
-            hasil_puluhan = self.puluhan(sisa)
-            if hasil_puluhan:
-                return f"{self.satuan[ratus]} ratus {hasil_puluhan}"
-            else:
-                return f"{self.satuan[ratus]} ratus"
+    def ratusan(self, angka: int) -> str:
+        # Mengubah angka di bawah 1000 menjadi teks.
+        if angka < 100:
+            return self.puluhan(angka)
+
+        ratus: int = angka // 100
+        sisa: int = angka % 100 
+
+        awalan: str = "seratus" if ratus == 1 else f"{self.SATUAN[ratus]} ratus"
+
+        if sisa == 0:
+            return awalan
+        return f"{awalan} {self.puluhan(sisa)}"
 
     def konversi(self, angka: int) -> str:
+        # Operasi utama dilakukan di sini
+        if not isinstance(angka, int):
+            raise TypeError("Input harus berupa integer.")
+
         if angka < 0:
             return f"minus {self.konversi(-angka)}"
         
@@ -57,17 +56,20 @@ class Konverter:
         # Kode dilakukan dengan mencari nilai yang setara dengan
         # input yang diberikan. Dimulai dari level tertinggi
         # menuju level yang lebih rendah.
-        for nilai, nama in self.angka_level_tinggi:
+        for nilai, nama in self.ANGKA_LEVEL_TINGGI:
             if angka >= nilai:
-                depan = angka // nilai
-                sisa = angka % nilai
+                depan: int = angka // nilai
+                sisa: int = angka % nilai
 
+                awalan: str
                 if nilai == 1_000 and depan == 1:
-                    head = "seribu"
+                    awalan = "seribu"
                 else:
-                    head = f"{self.konversi(depan)} {nama}"
+                    awalan = f"{self.konversi(depan)} {nama}"
 
-                return head if sisa == 0 else f"{head} {self.konversi(sisa)}"
+                if sisa == 0:
+                    return awalan  
+                return f"{awalan} {self.konversi(sisa)}"
 
         # fallback 
         return ""
@@ -85,7 +87,8 @@ def main():
             print(f"Hasil: {hasil}")
         except ValueError:
             print("Error: Input tidak valid. Harap masukkan angka bulat.")
-
+        except TypeError as e:
+            print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()
