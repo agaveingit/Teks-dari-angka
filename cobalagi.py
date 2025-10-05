@@ -14,23 +14,19 @@ def pisah_presisi(i: float) -> tuple[int, Decimal]:
     pecahan = angka_decimal - Decimal(utuh)
     return utuh, pecahan
 
-def cari_presisi(i: Decimal): 
+def cari_presisi(i: Decimal) -> str: 
     SATUAN: list[str] = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
-    for indeks, presisi_val in enumerate(PRESISI):
-        if i >= presisi_val:
-            floating_point_len: int = len(str(i))
-            baca: list[str] = ["koma"]
-            for idx in range(floating_point_len - 2):
-                belakang_koma: str = str(i)
-                int_bk = belakang_koma[idx + 2]
-                hasil = SATUAN[int(int_bk)]
-                baca.append(hasil)
-            return f"For loop 1. Index: {indeks}, presisi: {presisi_val}, panjang {floating_point_len}, {baca}"
-    
-    return "Tidak ada presisi yang cocok."
+    floating_point_len: int = len(str(i))
+    hasil_baca: list[str] = ["koma"]
+    for idx in range(floating_point_len - 2):
+        angka_desimal: str = str(i)
+        baca_desimal: int = int(angka_desimal[idx + 2])
+        hasil: str= SATUAN[baca_desimal]
+        hasil_baca.append(hasil)
+    hasil_baca = " ".join(hasil_baca)
+    return f"panjang {floating_point_len}, {hasil_baca}"
 
-y_decimal, z_decimal = pisah_presisi(2.879)
-print(f"Hasil pisah_presisi: {y_decimal}, {z_decimal}") 
+depan_koma, belakang_koma = pisah_presisi(2.879)
 
-w = cari_presisi(z_decimal)
+w = cari_presisi(belakang_koma)
 print(f"Hasil cari_presisi: {w}") 

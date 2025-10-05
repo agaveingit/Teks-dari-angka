@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 class Konverter:
     """
     Mengonversi angka menjadi teks ejaannya dalam Bahasa Indonesia.
@@ -75,15 +77,27 @@ class Konverter:
         return ""
     
 class Desimal:
-    def __init__(self):
-        self.BELAKANG_KOMA: list[tuple[int, str]] = [
-            (0.1, "satu"),
-            (0.01, "nol nol satu"),
-        ]
-    def _baca_desimal(self, angka: float) -> str:
-        depan_koma: int = int(angka)
-        setelah_koma: float = angka - depan_koma
-        raise NotImplementedError("Ntar dulu")
+
+    def _pisah_presisi(self, i: float) -> tuple[int, Decimal]:
+        angka_decimal = Decimal(str(i))
+        utuh = int(angka_decimal)
+        pecahan = angka_decimal - Decimal(utuh)
+        return utuh, pecahan
+
+    def _cari_presisi(i: Decimal) -> str: 
+        SATUAN: list[str] = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
+        floating_point_len: int = len(str(i))
+        hasil_baca: list[str] = ["koma"]
+        for idx in range(floating_point_len - 2):
+            angka_desimal: str = str(i)
+            baca_desimal: int = int(angka_desimal[idx + 2])
+            hasil: str= SATUAN[baca_desimal]
+            hasil_baca.append(hasil)
+        hasil_baca = " ".join(hasil_baca)
+        return f"panjang {floating_point_len}, {hasil_baca}"
+
+    depan_koma, belakang_koma = _pisah_presisi(2.879)
+    w = _cari_presisi(belakang_koma)
 
 def main():
     k = Konverter()
