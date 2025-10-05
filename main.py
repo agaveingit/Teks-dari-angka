@@ -76,39 +76,44 @@ class Konverter:
         # fallback 
         return ""
     
-class Desimal:
+class BacaDesimal:
+    def __init__(self) -> None:
+        self.SATUAN: list[str] = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 
+                                'enam', 'tujuh', 'delapan', 'sembilan']
 
-    def _pisah_presisi(self, i: float) -> tuple[int, Decimal]:
-        angka_decimal = Decimal(str(i))
+    def _pisah_presisi(self, angka: float) -> tuple[int, Decimal]:
+        angka_decimal = Decimal(str(angka))
         utuh = int(angka_decimal)
         pecahan = angka_decimal - Decimal(utuh)
         return utuh, pecahan
 
-    def _cari_presisi(i: Decimal) -> str: 
-        SATUAN: list[str] = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan']
-        floating_point_len: int = len(str(i))
+    def _cari_presisi(self, angka: Decimal) -> str: 
+        floating_point_len: int = len(str(angka))
         hasil_baca: list[str] = ["koma"]
         for idx in range(floating_point_len - 2):
-            angka_desimal: str = str(i)
+            angka_desimal: str = str(angka)
             baca_desimal: int = int(angka_desimal[idx + 2])
-            hasil: str= SATUAN[baca_desimal]
+            hasil: str= self.SATUAN[baca_desimal]
             hasil_baca.append(hasil)
         hasil_baca = " ".join(hasil_baca)
-        return f"panjang {floating_point_len}, {hasil_baca}"
-
-    depan_koma, belakang_koma = _pisah_presisi(2.879)
-    w = _cari_presisi(belakang_koma)
+        return f"{hasil_baca}"
+    
+    def baca(self, angka: Decimal) -> str:
+        raise NotImplementedError
 
 def main():
     k = Konverter()
+    # des = BacaDesimal()
     print("Masukkan angka untuk dikonversi (atau 'keluar' untuk berhenti):")
     while True:
         try:
             masukan = input("> ")
             if masukan.lower() == 'keluar':
                 break
-            angka = int(masukan)
-            hasil = k.konversi(angka)
+            # desimal: Decimal = Decimal(masukan)
+            angka_int = int(masukan)
+            # angka_desimal = des.baca(desimal)
+            hasil = k.konversi(angka_int)
             print(f"Hasil: {hasil}")
         except ValueError:
             print("Error: Input tidak valid. Harap masukkan angka bulat.")
