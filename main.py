@@ -13,7 +13,7 @@ class Konverter:
             (1_000, "ribu"),
         ]
 
-    def puluhan(self, angka: int) -> str:
+    def _puluhan(self, angka: int) -> str:
         # Mengubah angka di bawah 100 menjadi teks.
         if 0 <= angka < 10:
             return f"{self.SATUAN[angka]}"
@@ -25,10 +25,10 @@ class Konverter:
             return f"{self.SATUAN[puluh]} puluh"
         return f"{self.SATUAN[puluh]} puluh {self.SATUAN[sisa]}"
 
-    def ratusan(self, angka: int) -> str:
+    def _ratusan(self, angka: int) -> str:
         # Mengubah angka di bawah 1000 menjadi teks.
         if angka < 100:
-            return self.puluhan(angka)
+            return self._puluhan(angka)
 
         ratus: int = angka // 100
         sisa: int = angka % 100 
@@ -37,7 +37,7 @@ class Konverter:
 
         if sisa == 0:
             return awalan
-        return f"{awalan} {self.puluhan(sisa)}"
+        return f"{awalan} {self._puluhan(sisa)}"
 
     def konversi(self, angka: int) -> str:
         # Operasi utama dilakukan di sini
@@ -51,7 +51,7 @@ class Konverter:
             return "nol"
         
         if angka < 1000:
-            return self.ratusan(angka)
+            return self._ratusan(angka)
 
         # Kode dilakukan dengan mencari nilai yang setara dengan
         # input yang diberikan. Dimulai dari level tertinggi
@@ -73,6 +73,17 @@ class Konverter:
 
         # fallback 
         return ""
+    
+class Desimal:
+    def __init__(self):
+        self.BELAKANG_KOMA: list[tuple[int, str]] = [
+            (0.1, "satu"),
+            (0.01, "nol nol satu"),
+        ]
+    def _baca_desimal(self, angka: float) -> str:
+        depan_koma: int = int(angka)
+        setelah_koma: float = angka - depan_koma
+        raise NotImplementedError("Ntar dulu")
 
 def main():
     k = Konverter()
