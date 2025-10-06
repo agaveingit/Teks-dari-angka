@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+
 class Konverter:
     """
     Mengonversi angka menjadi teks ejaannya dalam Bahasa Indonesia.
@@ -75,25 +76,26 @@ class Konverter:
 
         # fallback 
         return ""
-    
+
+
 class BacaDesimal:
-    def __init__(self) -> None:
-        self.SATUAN: list[str] = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 
-                                'enam', 'tujuh', 'delapan', 'sembilan']
 
     def _pisah_presisi(self, angka: float) -> tuple[int, Decimal]:
         angka_decimal = Decimal(str(angka))
         utuh = int(angka_decimal)
         pecahan = angka_decimal - Decimal(utuh)
+
         return utuh, pecahan
 
     def _cari_presisi(self, angka: Decimal) -> str: 
+        SATUAN: list[str] = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 
+                                'enam', 'tujuh', 'delapan', 'sembilan']
         floating_point_len: int = len(str(angka))
         hasil_baca: list[str] = ["koma"]
         for idx in range(floating_point_len - 2):
             angka_desimal: str = str(angka)
             baca_desimal: int = int(angka_desimal[idx + 2])
-            hasil: str= self.SATUAN[baca_desimal]
+            hasil: str= SATUAN[baca_desimal]
             hasil_baca.append(hasil)
         hasil_baca = " ".join(hasil_baca)
         return f"{hasil_baca}"
@@ -101,24 +103,27 @@ class BacaDesimal:
     def baca(self, angka: Decimal) -> str:
         k = Konverter()
         depan_koma, belakang_koma = self._pisah_presisi(angka)
-        w = self._cari_presisi(belakang_koma)
         angka_int = int(depan_koma)
-        hasil = k.konversi(angka_int)
-        return f"Hasil: {hasil} {w}"
+        hasil: str = k.konversi(angka_int)
+
+        if not belakang_koma == 0: 
+            w = self._cari_presisi(belakang_koma)
+            return f"Hasil: {hasil} {w}"
+
+        return f"Hasil: {hasil}"
+
 
 def main():
-    k = Konverter()
-    # des = BacaDesimal()
+    # k = Konverter()
+    des = BacaDesimal()
     print("Masukkan angka untuk dikonversi (atau 'keluar' untuk berhenti):")
     while True:
         try:
             masukan = input("> ")
             if masukan.lower() == 'keluar':
                 break
-            # desimal: Decimal = Decimal(masukan)
-            angka_int = int(masukan)
-            # angka_desimal = des.baca(desimal)
-            hasil = k.konversi(angka_int)
+            desimal: Decimal = Decimal(masukan)
+            hasil = des.baca(desimal)
             print(f"Hasil: {hasil}")
         except ValueError:
             print("Error: Input tidak valid. Harap masukkan angka bulat.")
