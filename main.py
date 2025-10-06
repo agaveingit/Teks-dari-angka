@@ -84,7 +84,6 @@ class BacaDesimal:
         angka_decimal = Decimal(str(angka))
         utuh = int(angka_decimal)
         pecahan = angka_decimal - Decimal(utuh)
-
         return utuh, pecahan
 
     def _cari_presisi(self, angka: Decimal) -> str: 
@@ -92,6 +91,7 @@ class BacaDesimal:
                                 'enam', 'tujuh', 'delapan', 'sembilan']
         floating_point_len: int = len(str(angka))
         hasil_baca: list[str] = ["koma"]
+
         for idx in range(floating_point_len - 2):
             angka_desimal: str = str(angka)
             baca_desimal: int = int(angka_desimal[idx + 2])
@@ -114,7 +114,6 @@ class BacaDesimal:
 
 
 def main():
-    # k = Konverter()
     des = BacaDesimal()
     print("Masukkan angka untuk dikonversi (atau 'keluar' untuk berhenti):")
     while True:
@@ -129,6 +128,7 @@ def main():
             print("Error: Input tidak valid. Harap masukkan angka bulat.")
         except TypeError as e:
             print(f"Error: {e}")
+
 
 if __name__ == "__main__":
     main()
