@@ -1,6 +1,6 @@
 # Angka Jadi Teks 🔢
 
-Proyek ini menyediakan sebuah skrip Python sederhana untuk mengonversi angka (integer) menjadi ejaan yang sesuai dalam Bahasa Indonesia. Skrip ini mampu menangani angka dari nol hingga triliunan, termasuk bilangan negatif.
+Proyek ini menyediakan sebuah skrip Python sederhana untuk mengonversi angka (integer) menjadi ejaan yang sesuai dalam Bahasa Indonesia. Skrip ini mampu menangani angka dari nol hingga triliunan, termasuk bilangan negatif dan angka desimal.
 
 ## ✨ Fitur Utama
 
