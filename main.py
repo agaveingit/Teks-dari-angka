@@ -99,7 +99,12 @@ class BacaDesimal:
         return f"{hasil_baca}"
     
     def baca(self, angka: Decimal) -> str:
-        raise NotImplementedError
+        k = Konverter()
+        depan_koma, belakang_koma = self._pisah_presisi(angka)
+        w = self._cari_presisi(belakang_koma)
+        angka_int = int(depan_koma)
+        hasil = k.konversi(angka_int)
+        return f"Hasil: {hasil} {w}"
 
 def main():
     k = Konverter()

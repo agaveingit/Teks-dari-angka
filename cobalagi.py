@@ -30,3 +30,18 @@ depan_koma, belakang_koma = pisah_presisi(2.879)
 
 w = cari_presisi(belakang_koma)
 print(f"Hasil cari_presisi: {w}") 
+
+# k = Konverter()
+# print("Masukkan angka untuk dikonversi (atau 'keluar' untuk berhenti):")
+# while True:
+#     try:
+#         masukan = input("> ")
+#         if masukan.lower() == 'keluar':
+#             break
+#         angka_int = int(masukan)
+#         hasil = k.konversi(angka_int)
+#         print(f"Hasil: {hasil}")
+#     except ValueError:
+#         print("Error: Input tidak valid. Harap masukkan angka bulat.")
+#     except TypeError as e:
+#         print(f"Error: {e}")
