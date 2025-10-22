@@ -1,5 +1,9 @@
-from decimal import Decimal, InvalidOperation
+# Copyright (c) 2025 agaveingit
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
 
+from decimal import Decimal, InvalidOperation
 
 class Konverter:
     """
