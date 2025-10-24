@@ -13,9 +13,18 @@ Proyek ini menyediakan sebuah skrip Python sederhana untuk mengonversi angka (in
 
 ## ⚙️ Instalasi
 
-Tidak ada dependensi eksternal yang diperlukan. Anda hanya memerlukan **Python 3.6+** terinstal.
+Cara termudah untuk menginstal adalah melalui `pip`:
 
-Cukup kloning repositori ini atau unduh file `main.py`.
+```bash
+pip install angkajaditeks
+```
+
+Anda juga dapat mengkloning repositori ini untuk pengembangan:
+
+```bash
+git clone https://github.com/username/angkajaditeks.git
+cd angkajaditeks
+```
 
 ## 🚀 Cara Penggunaan
 
